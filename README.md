@@ -2,6 +2,7 @@
 * Streams, endpoints, parameters, payloads, etc. decscribed in the documents in this repository are considered **official** and **supported**.
 * The use of any other streams, endpoints, parameters, or payloads, etc. is **not supported**; **use them at your own risk and with no guarantees.**
 
+# STILL under construction, please contact use at npc@npcloud.io if you are instersted, thank you!
 
 Name | Description
 ------------ | ------------
