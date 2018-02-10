@@ -51,8 +51,6 @@ GET /api/v1/ping
 ```
 Test connectivity to the Rest API.
 
-**Weight:**
-1
 
 **Parameters:**
 NONE
@@ -81,7 +79,7 @@ NONE
 
 ### Contracts information
 ```
-GET /api/v1/exchangeContracts
+GET /api/v1/contracts
 ```
 Current trading contracts
 
@@ -99,11 +97,11 @@ NONE
 ## Data endpoints
 ### Live task book
 
-Get all living tasks by contract symbol
-
 ```
 GET /api/v1/tasks
 ```
+Get all living tasks by contract symbol
+
 
 **Parameters:**
 
@@ -119,23 +117,23 @@ page | INT | NO | Page number
 ```javascript
 [{
   "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
+  "contract": "SVPR",    // contract name
+  "status": "DOING",    // Task status
+  "createTime": 123332,    // task create time
   "expireOn": 122333,    // expire time of this task
-  "pId": 12345,       // Task's publish user Id
+  "ownerId": 12345,       // Task's owner's user Id
   "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task
-  "solutionNumber": 1       //number of solutions
+  "solutionCount": 1       //number of solutions
 }]
 ```
 
 ### Task query
 
-Query task by task Id
-
 ```
 GET /api/v1/taskWithId
 ```
+
+Query task by task Id
 
 **Parameters:**
 
@@ -153,22 +151,30 @@ tid | STRING | YES | contract symbol
   "contract": "SVPR",    // Task type
   "status": "DOING",    // Task type
   "expireOn": 122333,    // expire time of this task
-  "ownerId": 12345,       // Task's publish user Id
+  "createTime": 123332,    // task create time
+  "ownerId": 12345,       // Task's owner's user Id
   "price": "0.001",     // Upper price for the solution
-  "setting": {} ,          // detail information on the task
-  "solutionCount": 1       //number of solutions
+  "settings": {} ,          // detail information on the task
+  "solutionCount": 1,       //number of solutions
+  "solutions": [{       // solutions for this task
+          "sId": 1222,          //Solution id
+          "solverId": "111"     //solver's id
+          "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+          "solutionTime": 1233444      //receive time for this solution
+  }]
 }
 ```
 
 ### Task user's own query
 
-Query current user's own tasks
 
 ```
 GET /api/v1/taskOfUser
 ```
+Query current user's own tasks
 
 **Parameters:**
+
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
 contract | STRING | YES | contract symbol
@@ -184,57 +190,23 @@ page | INT | NO | Page number
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
   "status": "DOING",    // Task type
+  "createTime": 123332,    // task create time
   "expireOn": 122333,    // expire time of this task
   "ownerId": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task
-  "solutionCount": 1       //number of solutions
+  "solutionCount": 1,       //number of solutions
 }]
 ```
 
-### Solution query by task
-
-Query all solution by task Id.
-
-```
-GET /api/v1/solutions
-```
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-tid | STRING | YES | contract symbol
-
-
-**Response:**
-```javascript
-{
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
-  "ownerId": 12345,       // Task's publish user Id
-  "expireOn": 122333,    // expire time of this task
-  "price": "0.001",     // Upper price for the solution
-  "solutionCount": 1       //number of solutions
-  "solutions": [{       // detail information on the task
-        "sId": 1222,          //Solution id
-        "solverId": "111"     //solver's id
-        "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-        "solutionTime": 1233444      //receive time for this solution
-  }]
-}
-```
-
-### Accepted Solution Details by task
-
-Query solution details by task Id. Only task's owner has he privilege to
-query this API.
+### Accepted Solution with Detail
 
 ```
 GET /api/v1/solutionDetails
 ```
 
+Query solution details by task Id. Only task's owner has he privilege to
+query this API.
+
 **Parameters:**
 
 Name | Type | Mandatory | Description
@@ -250,6 +222,8 @@ tid | STRING | YES | contract symbol
   "status": "DOING",    // Task type
   "ownerId": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
+  "settings": {} ,          // detail information on the task
+  "solutionCount": 1,       //number of solutions
   "solutions": [{       // detail information on the task
         "sId": 1222,          //Solution id
         "solverId": "111"     //solver's id
@@ -274,7 +248,7 @@ Send in a new task.
   "contract": "SVPR",    // Contract symbol
   "ownerId": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task, defined by particular contracts(see contracts document)
+  "settings": {}           // detail information on the task, defined by particular contracts(see contracts document)
 }
 ```
 
@@ -290,13 +264,13 @@ Send in a new task.
   "ownerId": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "solutionCount": 0       //number of solutions
-  "setting": {}           // detail information on the task
+  "settings": {}           // detail information on the task
 }
 ```
 
 ### Accept Solution
 ```
-POST /api/v1/acceptSolution
+POST /api/v1/accept
 ```
 Task's owner can accept a valid solution, exchange will return solution's detail
 and deduct token from owner's balance.
@@ -336,7 +310,7 @@ Close an active task. All existing solution will be
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
-tId | STRING | NO |
+tId | STRING | NO | task id
 
 **Response:**
 ```javascript
@@ -344,37 +318,16 @@ tId | STRING | NO |
   "tid": "1233",      // task id
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
-  "status" : "CANCEL",       // status for task
+  "status" : "CLOSE",       // status for task
   "ownerId": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task
+  "price": "0.001"     // Upper price for the solution
 }
 ```
 
-
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-tId | STRING | NO |
-
-**Response:**
-```javascript
-{
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Contract symbol
-  "createTime": 123332,    // task create time
-  "status" : "CANCEL",       // status for task
-  "ownerId": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task
-}
-```
 
 ### Publish Solution
 ```
-POST /api/v3/allOrders (HMAC SHA256)
+POST /api/v1/solution
 ```
 User can publish solution for task.
 
@@ -386,7 +339,6 @@ User can publish solution for task.
     "solverId": "111"     //solver's id
     "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
     "detail": {},          //detail of this solution, defined by particular contracts(see contracts document)
-    "solutionTime": 1233444      //receive time for this solution
 }
 ```
 
@@ -398,7 +350,6 @@ User can publish solution for task.
     "sid": "1233",      // solution id
     "solverId": "111"     //solver's id
     "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-    "detail": {},          //detail of this solution, defined by particular contracts(see contracts document)
     "solutionTime": 1233444      //receive time for this solution
 }
 ```
@@ -586,7 +537,7 @@ Errors consist of three parts: an error code, a message and a detail
 #### -2015 REJECTED_MBX_KEY
  * Invalid API-key, IP, or permissions for action.
 
-### 21xx - Algorithm User Side Issues
+### 21xx - Algorithm Demand Side Issues
 
 #### -2101 PRICE_INVALID
  * result's buy price is too high or too low
@@ -597,6 +548,8 @@ Errors consist of three parts: an error code, a message and a detail
 #### -2103 CONTRACT_SCALE_OVERFLOW
  * Contract settings scale is bigger than max threshold
 
+#### -2104 BALANCE_NOT_ENOUGH
+ * User's balance is not enough to support creation of new task or accepting new solution
 
 ### 22xx - Algorithm Provider Side Issues
 

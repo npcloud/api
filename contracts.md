@@ -1,3 +1,4 @@
 # VRP contract
 
+# SVRP contract
 
