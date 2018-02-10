@@ -19,11 +19,13 @@
 {
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
-  "taskID": "1233",      // task id
-  "taskType": "SVPR",    // Task type
-  "pubId": 12345,       // Task's publish user Id
-  "pubPrice": "0.001",     // Upper price for the solution
-  "taskInfo": {}           // detail information on the task
+  "tid": "1233",      // task id
+  "contract": "SVPR",    // Contract symbol
+  "createTime": 123332,    // task create time
+  "ownerId": 12345,       // Task's publish user Id
+  "price": "0.001",     // Upper price for the solution
+  "solutionCount": 0,       //number of solutions
+  "setting": {}           // detail information on the task
 }
 ```
 
@@ -37,14 +39,13 @@
 {
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
-  "taskID": "1233",         // task id
-  "taskType": "SVPR",        // Task type
-  "pubId": 12345,           // Task's publish user Id
-  "pubPrice": "0.001",      // Upper price for the solution
-  "workerId": 1222,          //Solution's worker user id
-  "solutionId": 123,            //Id for this solution
-  "solutionPrice": "0.002",     //Price for the solution,
-  "solutionSummary": {},         //summary information of this solution
+  "tid": "1233",         // task id
+  "createTime": 123332,    // task create time
+  "task": {},           // detail information on task
+  "sId": 1222,          //Solution id
+  "solverId": "111"     //solver's id
+  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+  "solutionTime": 1233444      //receive time for this solution
 }
 ```
 
@@ -58,9 +59,11 @@
 {
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
-  "taskID": "1233",         // task id
-  "taskType": "SVPR",        // Task type
-  "taskStatus: "DOING",      //tasks latest status
+  "tid": "1233",         // task id
+  "createTime": 123332,    // task create time
+  "contract": "SVPR",    // Contract symbol
+  "solutionCount": 0,       //number of solutions
+  "status: "DOING",      //tasks latest status
 }
 ```
 ```
