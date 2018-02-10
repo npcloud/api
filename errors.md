@@ -1,13 +1,17 @@
 # Error codes for NPC rest API
-Errors consist of two parts: an error code and a message. Codes are universal,
+Errors consist of three parts: an error code, a message and a detail
+ message optionally. Codes are universal,
  but messages can vary. Here is the error JSON payload:
 ```javascript
 {
-  "code":-1121,
-  "msg":"Invalid contact."
+  "code":1121,
+  "msg":"Invalid contact.",
+  "detail": {}
 }
 ```
 
+## 200 - Success Request
+ * request is success, request id is given in details.requestId
 
 ## 10xx - General Server or Network issues
 #### -1000 UNKNOWN
@@ -22,8 +26,6 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 #### -1003 TOO_MANY_REQUESTS
  * Too many requests.
  * Too many requests queued.
- * Too many requests; current limit is %s requests per minute. Please use the websocket for live updates to avoid polling the API.
- * Way too many requests; IP banned until %s. Please use the websocket for live updates to avoid bans.
 
 #### -1006 UNEXPECTED_RESP
  * An unexpected response was received from the message bus. Execution status unknown.
@@ -46,6 +48,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 
 #### -1022 INVALID_SIGNATURE
  * Signature for this request is not valid.
+
 
 ## 11xx - Request issues
 #### -1100 ILLEGAL_CHARS
@@ -79,6 +82,7 @@ Errors consist of two parts: an error code and a message. Codes are universal,
  * Invalid data sent for a parameter.
  * Data sent for paramter '%s' is not valid.
 
+
 ## 20xx - Processing Issues
 #### -2008 BAD_API_ID
  * Invalid Api-Key ID
@@ -98,10 +102,10 @@ Errors consist of two parts: an error code and a message. Codes are universal,
 #### -2015 REJECTED_MBX_KEY
  * Invalid API-key, IP, or permissions for action.
 
-## 21xx - Demand Side Issues
+## 21xx - Algorithm User Side Issues
 
 #### -2101 PRICE_INVALID
- * Bid price is too high or too low
+ * result's buy price is too high or too low
 
 #### -2102 INVALID_CONTRACT_SETTINGS
  * Format or logical issues for contract settings
@@ -110,10 +114,11 @@ Errors consist of two parts: an error code and a message. Codes are universal,
  * Contract settings scale is bigger than max threshold
 
 
-## 22xx - Supply Side Issues
+## 22xx - Algorithm Provider Side Issues
 
 #### -2201 PRICE_INVALID
-  * ask price is too high or too low
+  * result's sell price is too high or too low
 
 #### -2202 INVALID_ANSWER
-  *
+  * optimization result given by the provider is invalid. Detail format of the
+   errors varies by different contact definition.
