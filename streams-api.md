@@ -61,6 +61,6 @@
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
   "solutionCount": 0,       //number of solutions
-  "status: "CLOSE",      //tasks latest status
+  "status": "CLOSE",      //tasks latest status
 }
 ```

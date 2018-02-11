@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91857a95-332b-46ef-a6fd-b2ecd76f6b0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/rest-api.md" afterPath="$PROJECT_DIR$/rest-api.md" />
+      <change beforePath="$PROJECT_DIR$/streams-api.md" afterPath="$PROJECT_DIR$/streams-api.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +48,8 @@
         <entry file="file://$PROJECT_DIR$/rest-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-1089">
-                <caret line="92" column="13" lean-forward="false" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+              <first_editor relative-caret-position="303">
+                <caret line="262" column="9" lean-forward="false" selection-start-line="262" selection-start-column="3" selection-end-line="262" selection-end-column="9" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -63,8 +63,8 @@
         <entry file="file://$PROJECT_DIR$/streams-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="280">
-                <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <first_editor relative-caret-position="640">
+                <caret line="63" column="10" lean-forward="false" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -82,6 +82,7 @@
       <find>CLOSE</find>
       <find>CLOSED</find>
       <find>contracts</find>
+      <find>status</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,8 +102,8 @@
         <option value="$PROJECT_DIR$/stream.md" />
         <option value="$PROJECT_DIR$/contracts.md" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/streams-api.md" />
         <option value="$PROJECT_DIR$/rest-api.md" />
+        <option value="$PROJECT_DIR$/streams-api.md" />
       </list>
     </option>
   </component>
@@ -612,8 +613,8 @@
     <entry file="file://$PROJECT_DIR$/streams-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="280">
-            <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <first_editor relative-caret-position="640">
+            <caret line="63" column="10" lean-forward="false" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
             <folding />
           </first_editor>
           <second_editor>
@@ -625,8 +626,8 @@
     <entry file="file://$PROJECT_DIR$/rest-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-1089">
-            <caret line="92" column="13" lean-forward="false" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+          <first_editor relative-caret-position="303">
+            <caret line="262" column="9" lean-forward="false" selection-start-line="262" selection-start-column="3" selection-end-line="262" selection-end-column="9" />
             <folding />
           </first_editor>
           <second_editor>
