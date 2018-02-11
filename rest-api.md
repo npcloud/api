@@ -90,7 +90,7 @@ NONE
 **Response:**
 ```javascript
 {
-  "contracts: ["VPR", "SVRP"]
+  "contracts": ["VPR", "SVRP"]
 }
 ```
 

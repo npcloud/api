@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91857a95-332b-46ef-a6fd-b2ecd76f6b0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/streams-api.md" afterPath="$PROJECT_DIR$/streams-api.md" />
+      <change beforePath="$PROJECT_DIR$/rest-api.md" afterPath="$PROJECT_DIR$/rest-api.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +48,8 @@
         <entry file="file://$PROJECT_DIR$/rest-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="471">
-                <caret line="94" column="3" lean-forward="true" selection-start-line="93" selection-start-column="1" selection-end-line="94" selection-end-column="3" />
+              <first_editor relative-caret-position="-1089">
+                <caret line="92" column="13" lean-forward="false" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -64,7 +64,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="280">
-                <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+                <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -101,8 +101,8 @@
         <option value="$PROJECT_DIR$/stream.md" />
         <option value="$PROJECT_DIR$/contracts.md" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/rest-api.md" />
         <option value="$PROJECT_DIR$/streams-api.md" />
+        <option value="$PROJECT_DIR$/rest-api.md" />
       </list>
     </option>
   </component>
@@ -613,7 +613,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="280">
-            <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
@@ -625,8 +625,8 @@
     <entry file="file://$PROJECT_DIR$/rest-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="471">
-            <caret line="94" column="3" lean-forward="true" selection-start-line="93" selection-start-column="1" selection-end-line="94" selection-end-column="3" />
+          <first_editor relative-caret-position="-1089">
+            <caret line="92" column="13" lean-forward="false" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
             <folding />
           </first_editor>
           <second_editor>
