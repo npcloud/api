@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91857a95-332b-46ef-a6fd-b2ecd76f6b0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/rest-api.md" afterPath="$PROJECT_DIR$/rest-api.md" />
       <change beforePath="$PROJECT_DIR$/streams-api.md" afterPath="$PROJECT_DIR$/streams-api.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -46,12 +44,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rest-api.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rest-api.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="48" lean-forward="false" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
+              <first_editor relative-caret-position="471">
+                <caret line="94" column="3" lean-forward="true" selection-start-line="93" selection-start-column="1" selection-end-line="94" selection-end-column="3" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -61,12 +59,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="streams-api.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="streams-api.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/streams-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="1408">
-                <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <first_editor relative-caret-position="280">
+                <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -83,6 +81,7 @@
       <find>1010</find>
       <find>CLOSE</find>
       <find>CLOSED</find>
+      <find>contracts</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -610,11 +609,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest-api.md">
+    <entry file="file://$PROJECT_DIR$/streams-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="48" lean-forward="false" selection-start-line="0" selection-start-column="48" selection-end-line="0" selection-end-column="48" />
+          <first_editor relative-caret-position="280">
+            <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
@@ -623,11 +622,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/streams-api.md">
+    <entry file="file://$PROJECT_DIR$/rest-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1408">
-            <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <first_editor relative-caret-position="471">
+            <caret line="94" column="3" lean-forward="true" selection-start-line="93" selection-start-column="1" selection-end-line="94" selection-end-column="3" />
             <folding />
           </first_editor>
           <second_editor>
