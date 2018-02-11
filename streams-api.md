@@ -63,4 +63,3 @@
   "status: "CLOSE",      //tasks latest status
 }
 ```
-```

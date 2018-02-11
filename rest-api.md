@@ -1,4 +1,4 @@
-# Public Rest API for NPCloud
+# Trading and Data REST API for NPCloud Exchange
 # General API Information
 * The base endpoint is: **https://api.npcloud.io**
 * All endpoints return either a JSON object or array.
@@ -40,7 +40,7 @@ but not get a response within the timeout period.
 
 * NEW
 * DOING
-* CLOSE
+* CLOSED
 * REJECTED
 
 
@@ -318,7 +318,7 @@ tId | STRING | NO | task id
   "tid": "1233",      // task id
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
-  "status" : "CLOSE",       // status for task
+  "status" : "CLOSED",       // status for task
   "ownerId": 12345,       // Task's publish user Id
   "price": "0.001"     // Upper price for the solution
 }
