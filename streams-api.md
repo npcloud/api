@@ -39,11 +39,12 @@
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",         // task id
-  "sId": 1222,          //Solution id
-   "contract": "SVPR",    // Contract symbol
-  "solverId": "111"     //solver's id
-  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-  "solutionTime": 1233444      //receive time for this solution
+  "sid": 1222,          //Solution id
+  "contract": "SVPR",    // Contract symbol
+  "workerId": "111"     //solver's id
+  "price": "0.001",     //solution's price set by the worker
+  "solution": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+  "createTime": 1233444      //receive time for this solution
 }
 ```
 

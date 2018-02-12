@@ -6,7 +6,7 @@ Errors consist of three parts: an error code, a message and a detail
 {
   "code":1121,
   "msg":"Invalid contact.",
-  "detail": {}
+  "data": {}
 }
 ```
 
