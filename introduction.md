@@ -18,12 +18,6 @@ result of certain optimization problem, to buy optimization result from
 
 ![](http://npcloud.io/assets/images/system_arch.png)
 
-## Algorithm Supply side (Worker)
+## Algorithm Supply side (Worker) and user side interaction
 
-Following diagram describe algorithm provider's basic workflow and interaction f
-withe NPCloud Exchange.
-
-## Algorithm Demand Side (User)
-
-Following diagram describe algorithm user's basic workflow and interaction f
-withe NPCloud Exchange.
+![](assets/flowchart.png)
