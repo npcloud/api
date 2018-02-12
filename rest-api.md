@@ -2,15 +2,13 @@
 # General API Information
 * The base endpoint is: **https://api.npcloud.io**
 * All endpoints return either a JSON object or array.
-* Data is returned in **ascending** order. Oldest first, newest last.
+* Data is returned in **descending** order in most case. Newest first, oldest last.
 * All time and timestamp related fields are in milliseconds.
 * HTTP `4XX` return codes are used for for malformed requests;
   the issue is on the sender's side.
 * HTTP `5XX` return codes are used for internal errors; the issue is on
   NPCloud's side.
-* HTTP `504` return code is used when the API successfully sent the message
-but not get a response within the timeout period.
-* Any endpoint can return an ERROR; the error payload is as follows:
+* Any endpoint can return an ERROR message; the error payload is as follows:
 ```javascript
 {
   "code": -1121,
@@ -20,8 +18,6 @@ but not get a response within the timeout period.
 ```
 
 * When endpoint process your request successfully, the payload is as follows:
-```javascript
-* Any endpoint can retun an ERROR; the error payload is as follows:
 ```javascript
 {
   "code": 200,
@@ -39,8 +35,7 @@ but not get a response within the timeout period.
 # Endpoint security type
 * Each endpoint has a security type that determines the how you will
   interact with it.
-* API-keys are passed into the Rest API via the `X-NPC-APIKEY`
-  header.
+* API-key are passed into the Rest API via the `X-NPC-APIKEY`;
 * API-keys and secret-keys **are case sensitive**.
 * API-keys are required for trading rest API
 
@@ -128,11 +123,12 @@ page | INT | NO | Page number
 ```javascript
 [{
   "tid": "1233",      // task id
+  "clientTaskId": "1233",      // task id specified by user
   "contract": "SVPR",    // contract name
   "status": "DOING",    // Task status
-  "createTime": 123332,    // task create time
-  "expireTime": 122333,    // expire time of this task
-  "ownerId": 12345,       // Task's owner's user Id
+  "createTime": 123332,    // task's create time
+  "expireTime": 122333,    // task's expire time
+  "createUser": 12345,       // Task's owner's user Id
   "price": "0.001",     // Upper price for the solution
   "solutionCount": 1       //number of solutions
 }]
@@ -162,9 +158,10 @@ tid | STRING | YES | task id
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
   "status": "DOING",    // Task type
-  "expireTime": 122333,    // expire time of this task
+  "clientTaskId": "1233",      // task id specified by user
+  "expireTime": 122333,    // task's expire time
   "createTime": 123332,    // task create time
-  "ownerId": 12345,       // Task's owner's user Id
+  "createUser": 12345,       // Task's owner's user Id
   "price": "0.001",     // Upper price for the solution
   "setting": {} ,          // detail information on the task
   "solutionCount": 1,       //number of solutions
@@ -177,7 +174,7 @@ tid | STRING | YES | task id
 }
 ```
 
-### Query user's own tasks
+### Query user's published tasks
 
 ```
 GET /api/v1/tasks_of_user
@@ -203,18 +200,18 @@ page | INT | NO | Page number
   "status": "DOING",    // Task type
   "createTime": 123332,    // task create time
   "expireTime": 122333,    // expire time of this task
-  "ownerId": 12345,       // Task's publish user Id
+  "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "solutionCount": 1,       //number of solutions
 }]
 ```
 
-### Query user's own solutions
+### Query user's working solutions
 
 ```
 GET /api/v1/tasks_of_workers
 ```
-Query current workers's participated tasks
+Query current user's  tasks
 
 **Parameters:**
 
@@ -233,9 +230,10 @@ page | INT | NO | Page number
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
   "status": "DOING",    // Task type
+  "clientTaskId": "1233",      // task id specified by user
   "createTime": 123332,    // task create time
   "expireTime": 122333,    // expire time of this task
-  "ownerId": 12345,       // Task's publish user Id
+  "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "solutionCount": 1,       //number of solutions,
   "solution": {       // soluiton of curent user
@@ -287,7 +285,8 @@ Send in a new task.
 ```javascript
 {
   "contract": "SVPR",    // Contract symbol
-  "ownerId": 12345,       // Task's publish user Id
+  "clientTaskId": "1233",      // task id specified by user
+  "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "setting": {}           // detail information on the task, defined by particular contracts(see contracts document)
 }
@@ -295,11 +294,12 @@ Send in a new task.
 
 
 
-**Response FULL:**
+**Response:**
 ```javascript
 {
   "tid": "1233",      // task id
   "contract": "SVPR",    // Contract symbol
+  "clientTaskId": "1233",      // task id specified by user
   "createTime": 123332,    // task create time
   "status" : "DOING",       // status for task
   "createUser": 12345,       // Task's publish user Id
@@ -327,19 +327,11 @@ sid | STRING | NO | Solution Id
 ```javascript
 {
   "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
-  "createUser": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
-  "solution": {       // detail information on the task
-        "sid": 1222,          //Solution id
-        "workerId": "111"     //solver's id
-        "solution": {
-            "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-            "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
-        },
-        "createTime": 1233444      //receive time for this solution
-  }
+  "sid": 1222,          //Solution id
+  "workerId": "111"     //solver's id
+  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+  "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
+  "createTime": 1233444      //receive time for this solution
 }
 ```
 
@@ -359,6 +351,7 @@ tid | STRING | NO | task id
 ```javascript
 {
   "tid": "1233",      // task id
+  "clientTaskId": "1233",      // task id specified by user
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
   "createUser": 12345,       // Task's publish user Id
@@ -382,7 +375,7 @@ User can publish solution for task.
     "workerId": "111"     //solver's id
     "price": "12.2"     //price set by the worker
     "solution": {},     // solution detail, defined by particular contracts(see contracts document)
-    "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
+    "%OTHER_SOLUTION_FIELDS%": {}, //detail of this solution, defined by particular contracts(see contracts document)
 }
 ```
 
