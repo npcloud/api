@@ -18,6 +18,6 @@ result of certain optimization problem, to buy optimization result from
 
 ![](http://npcloud.io/assets/images/system_arch.png)
 
-## Algorithm Supply side (Worker) and user side interaction
+## Algorithm supply side (Worker) and user side interaction
 
 ![](assets/flowchart.png)
