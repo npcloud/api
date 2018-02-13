@@ -134,50 +134,11 @@ page | INT | NO | Page number
 }]
 ```
 
-### Query task by task id
-
-```
-GET /api/v1/task_of_id
-```
-
-Query task by task Id
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-contract | STRING | YES | contract symbol
-tid | STRING | YES | task id
-
-
-**Caution:** setting limit=0 will return all living tasks.
-
-**Response:**
-```javascript
-{
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
-  "clientTaskId": "1233",      // task id specified by user
-  "expireTime": 122333,    // task's expire time
-  "createTime": 123332,    // task create time
-  "createUser": 12345,       // Task's owner's user Id
-  "price": "0.001",     // Upper price for the solution
-  "setting": {} ,          // detail information on the task
-  "solutionCount": 1,       //number of solutions
-  "solutions": [{       // solutions for this task
-          "sid": 1222,          //Solution id
-          "workerId": "111"     //solver's id
-          "solution": {},       // defined by particular contracts(see contracts document)
-          "createTime": 1233444      //receive time for this solution
-  }]
-}
-```
 
 ### Query user's published tasks
 
 ```
-GET /api/v1/tasks_of_user
+GET /api/v1/published_tasks
 ```
 Query current user's publish tasks
 
@@ -206,10 +167,10 @@ page | INT | NO | Page number
 }]
 ```
 
-### Query user's working solutions
+### Query user's solved tasks
 
 ```
-GET /api/v1/tasks_of_workers
+GET /api/v1/solved_tasks
 ```
 Query current user's  tasks
 
@@ -235,20 +196,54 @@ page | INT | NO | Page number
   "expireTime": 122333,    // expire time of this task
   "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
-  "solutionCount": 1,       //number of solutions,
-  "solution": {       // soluiton of curent user
-            "sid": 1222,          //Solution id
-            "workerId": "111"     //solver's id
-            "solution": {},       // defined by particular contracts(see contracts document)
-            "createTime": 1233444      //receive time for this solution
-   }
+  "solutionCount": 1,       //number of solutions
 }]
 ```
 
-### Solution with Detail
+### Query task detail by task id
 
 ```
-GET /api/v1/solution_of_id
+GET /api/v1/task_info
+```
+
+Query task by task Id, return task information and task's solution summary.
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+contract | STRING | YES | contract symbol
+tid | STRING | YES | task id
+
+
+**Caution:** setting limit=0 will return all living tasks.
+
+**Response:**
+```javascript
+{
+  "tid": "1233",      // task id
+  "contract": "SVPR",    // Task type
+  "status": "DOING",    // Task type
+  "clientTaskId": "1233",      // task id specified by user
+  "expireTime": 122333,    // task's expire time
+  "createTime": 123332,    // task create time
+  "createUser": 12345,       // Task's owner's user Id
+  "price": "0.001",     // Upper price for the solution
+  "setting": {} ,          // detail information on the task
+  "solutions": [{       // solutions for this task
+          "sid": 1222,          //Solution id
+          "createUser": "111"     //solver's id
+          "objectives": {},       // solution's objectives defined by particular contracts(see contracts document)
+          "accepted": 1,       // is the solution is accepted by task publisher
+          "createTime": 1233444      //receive time for this solution
+  }]
+}
+```
+
+### Query solution detail
+
+```
+GET /api/v1/solution_info
 ```
 
 Query solution by solution id. Only solution's creator and solutions' acceptor can
