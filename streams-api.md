@@ -23,7 +23,7 @@
   "clientTaskId": "1233",      // task id specified by user
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
-  "ownerId": 12345,       // Task's publish user Id
+  "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "solutionCount": 0       //number of solutions
 }
@@ -37,15 +37,16 @@
 **Payload:**
 ```javascript
 {
-  "eventType": "newTask",  // Event type
+  "eventType": "newSolution",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",         // task id
   "clientTaskId": "1233",      // task id specified by user
   "sid": "1222",          //Solution id
   "contract": "SVPR",    // Contract symbol
-  "workerId": "111"     //solver's id
+  "createUser": "111"     //solver's id
   "price": "0.001",     //solution's price set by the worker
-  "solution": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+  "status": "SUBMITTED",     //solution's price set by the worker
+  "solution": {},        //detail of this solution, defined by particular contracts(see contracts document)
   "createTime": 1233444      //receive time for this solution
 }
 ```
@@ -58,13 +59,13 @@
 **Payload:**
 ```javascript
 {
-  "eventType": "newTask",  // Event type
+  "eventType": "taskStatus",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",         // task id
   "clientTaskId": "1233",      // task id specified by user
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
   "solutionCount": 0,       //number of solutions
-  "status": "CLOSE",      //tasks latest status
+  "status": "CLOSED",      //tasks latest status
 }
 ```

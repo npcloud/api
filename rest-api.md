@@ -158,7 +158,7 @@ page | INT | NO | Page number
 [{
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
+  "status": "NEW",    // Task type
   "createTime": 123332,    // task create time
   "expireTime": 122333,    // expire time of this task
   "createUser": 12345,       // Task's publish user Id
@@ -190,7 +190,7 @@ page | INT | NO | Page number
 [{
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
+  "status": "NEW",    // Task type
   "clientTaskId": "1233",      // task id specified by user
   "createTime": 123332,    // task create time
   "expireTime": 122333,    // expire time of this task
@@ -223,7 +223,7 @@ tid | STRING | YES | task id
 {
   "tid": "1233",      // task id
   "contract": "SVPR",    // Task type
-  "status": "DOING",    // Task type
+  "status": "NEW",    // Task type
   "clientTaskId": "1233",      // task id specified by user
   "expireTime": 122333,    // task's expire time
   "createTime": 123332,    // task create time
@@ -234,7 +234,7 @@ tid | STRING | YES | task id
           "sid": 1222,          //Solution id
           "createUser": "111"     //solver's id
           "objectives": {},       // solution's objectives defined by particular contracts(see contracts document)
-          "accepted": 1,       // is the solution is accepted by task publisher
+          "status": "SUBMITTED",       // is the solution is accepted by task publisher
           "createTime": 1233444      //receive time for this solution
   }]
 }
@@ -281,7 +281,6 @@ Send in a new task.
 {
   "contract": "SVPR",    // Contract symbol
   "clientTaskId": "1233",      // task id specified by user
-  "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
   "setting": {}           // detail information on the task, defined by particular contracts(see contracts document)
 }
@@ -296,45 +295,19 @@ Send in a new task.
   "contract": "SVPR",    // Contract symbol
   "clientTaskId": "1233",      // task id specified by user
   "createTime": 123332,    // task create time
-  "status" : "DOING",       // status for task
+  "status" : "NEW",       // status for task
   "createUser": 12345,       // Task's publish user Id
   "price": "0.001",     // Upper price for the solution
-  "solutionCount": 0       //number of solutions
-  "setting": {}           // detail information on the task
 }
 ```
 
-### Accept Solution
-```
-POST /api/v1/accept_solution
-```
-Task's owner can accept a valid solution, exchange will return solution's detail
-and deduct token from owner's balance.
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-tid | STRING | NO | Task Id
-sid | STRING | NO | Solution Id
-
-**Response:**
-```javascript
-{
-  "tid": "1233",      // task id
-  "sid": 1222,          //Solution id
-  "workerId": "111"     //solver's id
-  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-  "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
-  "createTime": 1233444      //receive time for this solution
-}
-```
 
 ### Close Task
 ```
 POST /api/v1/close_task
 ```
-Close an active task. All existing solution will be
+Try to close an active task. New solution will not be submitted to task.
+Task is closed successfully when all pending solutions are processed.
 
 **Parameters:**
 
@@ -360,14 +333,13 @@ tid | STRING | NO | task id
 ```
 POST /api/v1/solution
 ```
-User can publish solution for task.
+User publish solution for task.
 
 **Parameters:**
 
 ```javascript
 {
     "tid": "1233",      // task id
-    "workerId": "111"     //solver's id
     "price": "12.2"     //price set by the worker
     "solution": {},     // solution detail, defined by particular contracts(see contracts document)
     "%OTHER_SOLUTION_FIELDS%": {}, //detail of this solution, defined by particular contracts(see contracts document)
@@ -380,9 +352,34 @@ User can publish solution for task.
 {
     "tid": "1233",      // task id
     "sid": "1233",      // solution id
-    "workerId": "111"     //solver's id
+    "createUser": "111"     //solver's id
     "price": "12.2"     //price set by the worker
     "createTime": 1233444      //receive time for this solution
+}
+```
+
+### Task owner accept Solution
+```
+POST /api/v1/accept_solution
+```
+Task's owner can accept a valid solution, exchange will return solution's detail
+and deduct token from owner's balance.
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+sid | STRING | NO | Solution Id
+
+**Response:**
+```javascript
+{
+  "tid": "1233",      // task id
+  "sid": 1222,          //Solution id
+  "workerId": "111"     //solver's id
+  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
+  "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
+  "createTime": 1233444      //receive time for this solution
 }
 ```
 
@@ -414,7 +411,7 @@ Specifics on how user data streams work is in another document.
 
 ### Start user data stream
 ```
-POST /api/v1/stream
+GET /api/v1/stream
 ```
 Start a new  data stream. The stream will close after 60 minutes unless a keepalive is sent.
 
@@ -431,7 +428,7 @@ NONE
 
 ### Keepalive user data stream
 ```
-PUT /api/v1/stream
+POST /api/v1/stream
 ```
 Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
 
@@ -537,8 +534,6 @@ Errors consist of three parts: an error code, a message and a detail
 #### -2002 CONTRACT_SUSPEND
 * Contract is not enabled
 
-### 21xx - Algorithm Demand side Issues
-
 #### -2101 BUY_PRICE_INVALID
  * result's buy price is too high or too low
 
@@ -553,9 +548,6 @@ Errors consist of three parts: an error code, a message and a detail
 
 #### -2105 NO_SOLUTION_FOUND
  * Solution not found to support operation
-
-
-### 22xx - Algorithm Provider side Issues
 
 #### -2201 SELL_PRICE_INVALID
   * result's sell price is too high or too low
