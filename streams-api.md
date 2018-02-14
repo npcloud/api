@@ -45,7 +45,7 @@
   "contract": "SVPR",    // Contract symbol
   "createUser": "111"     //solver's id
   "price": "0.001",     //solution's price set by the worker
-  "status": "SUBMITTED",     //solution's price set by the worker
+  "status": "SUBMITTED",     //status of the solution
   "solution": {},        //detail of this solution, defined by particular contracts(see contracts document)
   "createTime": 1233444      //receive time for this solution
 }

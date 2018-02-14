@@ -60,12 +60,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rest-api.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rest-api.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="372">
-                <caret line="371" column="0" lean-forward="false" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+              <first_editor relative-caret-position="7">
+                <caret line="483" column="19" lean-forward="false" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
+                <folding />
+              </first_editor>
+              <second_editor>
+                <js_state />
+              </second_editor>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="streams-api.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/streams-api.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="280">
+                <caret line="47" column="53" lean-forward="false" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -101,6 +116,7 @@
       <find>accepter</find>
       <find>accept</find>
       <find>DOING</find>
+      <find>publish</find>
     </findStrings>
     <replaceStrings>
       <replace>workerId</replace>
@@ -130,12 +146,12 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/introduction.md" />
         <option value="$PROJECT_DIR$/errors.md" />
-        <option value="$PROJECT_DIR$/streams-api.md" />
         <option value="$PROJECT_DIR$/rest-api.md" />
+        <option value="$PROJECT_DIR$/streams-api.md" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="5">
+  <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="67" />
     <option name="y" value="25" />
     <option name="width" value="1062" />
@@ -280,7 +296,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1062" height="1055" extended-state="5" />
+    <frame x="67" y="25" width="1062" height="1055" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -773,11 +789,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/streams-api.md">
+    <entry file="file://$PROJECT_DIR$/rest-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="232">
-            <caret line="23" column="11" lean-forward="false" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="11" />
+          <first_editor relative-caret-position="7">
+            <caret line="483" column="19" lean-forward="false" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
             <folding />
           </first_editor>
           <second_editor>
@@ -786,11 +802,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest-api.md">
+    <entry file="file://$PROJECT_DIR$/streams-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="372">
-            <caret line="371" column="0" lean-forward="false" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
+          <first_editor relative-caret-position="280">
+            <caret line="47" column="53" lean-forward="false" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
             <folding />
           </first_editor>
           <second_editor>

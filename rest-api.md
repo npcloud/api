@@ -1,4 +1,4 @@
-# Trading and Data REST API for NPCloud Exchange
+# Trading and Data API for NPCloud Exchange
 # General API Information
 * The base endpoint is: **https://api.npcloud.io**
 * All endpoints return either a JSON object or array.
