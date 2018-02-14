@@ -17,7 +17,3 @@ result of certain optimization problem, to buy optimization result from
  partner in NPCloud ecosystem to support development and research.
 
 ![](http://npcloud.io/assets/images/system_arch.png)
-
-## Algorithm supply side and user side interaction
-
-![](assets/flowchart.png)

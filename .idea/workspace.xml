@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91857a95-332b-46ef-a6fd-b2ecd76f6b0a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/rest-api.md" afterPath="$PROJECT_DIR$/rest-api.md" />
-      <change beforePath="$PROJECT_DIR$/streams-api.md" afterPath="$PROJECT_DIR$/streams-api.md" />
+      <change beforePath="$PROJECT_DIR$/introduction.md" afterPath="$PROJECT_DIR$/introduction.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,12 +44,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="introduction.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="introduction.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/introduction.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="480">
-                <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+              <first_editor relative-caret-position="456">
+                <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -75,12 +74,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="streams-api.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="streams-api.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/streams-api.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="280">
-                <caret line="47" column="53" lean-forward="false" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
+              <first_editor relative-caret-position="1032">
+                <caret line="43" column="20" lean-forward="true" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -144,10 +143,10 @@
         <option value="$PROJECT_DIR$/stream.md" />
         <option value="$PROJECT_DIR$/contracts.md" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/introduction.md" />
         <option value="$PROJECT_DIR$/errors.md" />
         <option value="$PROJECT_DIR$/rest-api.md" />
         <option value="$PROJECT_DIR$/streams-api.md" />
+        <option value="$PROJECT_DIR$/introduction.md" />
       </list>
     </option>
   </component>
@@ -744,11 +743,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/introduction.md">
+    <entry file="file://$PROJECT_DIR$/rest-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="480">
-            <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          <first_editor relative-caret-position="7">
+            <caret line="483" column="19" lean-forward="false" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
             <folding />
           </first_editor>
           <second_editor>
@@ -757,11 +756,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contracts.md">
+    <entry file="file://$PROJECT_DIR$/streams-api.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="48">
-            <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+          <first_editor relative-caret-position="1032">
+            <caret line="43" column="20" lean-forward="true" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
             <folding />
           </first_editor>
           <second_editor>
@@ -789,11 +788,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest-api.md">
+    <entry file="file://$PROJECT_DIR$/contracts.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="7">
-            <caret line="483" column="19" lean-forward="false" selection-start-line="483" selection-start-column="19" selection-end-line="483" selection-end-column="19" />
+          <first_editor relative-caret-position="48">
+            <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
             <folding />
           </first_editor>
           <second_editor>
@@ -802,11 +801,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/streams-api.md">
+    <entry file="file://$PROJECT_DIR$/introduction.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="280">
-            <caret line="47" column="53" lean-forward="false" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
+          <first_editor relative-caret-position="456">
+            <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor>
