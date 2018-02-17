@@ -371,13 +371,15 @@ tid | STRING | NO | task id
 **Response:**
 ```javascript
 {
-  "tid": "1233",      // task id
-  "clientTaskId": "1233",      // task id specified by user
-  "contract": "SVPR",    // Contract symbol
-  "createTime": 123332,    // task create time
-  "createUser": 12345,       // Task's publish user Id
-  "status" : "CLOSED",       // status for task
-  "price": "0.001"     // Upper price for the solution
+  "tid": "TASK_6370525770497916928",
+  "contract": "DemoContract",
+  "status": "CLOSED",
+  "createUser": 1,
+  "createTime": 1518851702332,
+  "lastUpdateTime": 1518869937824,
+  "price": 0.1,
+  "expireTime": 1518853502320,
+  "solutionIds": []
 }
 ```
 
