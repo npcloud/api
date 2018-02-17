@@ -486,62 +486,6 @@ Get current account information.
 ```
 
 
-## Stream endpoints
-Specifics on how user data streams work is in another document.
-
-### Start user data stream
-```
-GET /api/v1/stream
-```
-Start a new  data stream. The stream will close after 60 minutes unless a keepalive is sent.
-
-
-**Parameters:**
-NONE
-
-**Response:**
-```javascript
-{
-  "listenKey": "pqia91ma19a5s61cv6a81va65sdf19v8a65a1a5s61cv6a81va65sdf19v8a65a1"
-}
-```
-
-### Keepalive user data stream
-```
-POST /api/v1/stream
-```
-Keepalive a user data stream to prevent a time out. User data streams will close after 60 minutes. It's recommended to send a ping about every 30 minutes.
-
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-listenKey | STRING | YES
-
-**Response:**
-```javascript
-{}
-```
-
-### Close user data stream (USER_STREAM)
-```
-DELETE /api/v1/stream
-```
-Close out a user data stream.
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-listenKey | STRING | YES
-
-**Response:**
-```javascript
-{}
-```
-
-
 ## Error codes for NPC rest API
 Errors consist of three parts: an error code, a message and a detail
  message optionally. Codes are universal,

@@ -1,18 +1,13 @@
-# Web Socket Streams for NPCloud Exchange
-# General WSS information
-* The base endpoint is: **wss://stream.npcloud.io:9443**
-* Streams can be access either in a single raw stream or a combined stream
-* Raw streams are accessed at **/ws/\<streamName\>**
-* Combined streams are accessed at **/stream?streams=\<streamName1\>/\<streamName2\>/\<streamName3\>**
-* Combined stream events are wrapped as follows: **{"stream":"\<streamName\>","data":\<rawPayload\>}**
-* All symbols for streams are **lowercase**
-* A single connection to **stream.npcloud.io** is only valid for 24 hours; expect to be disconnected at the 24 hour mark
+# MQTT Streams for NPCloud Exchange
+# General information
+* The base endpoint is: **stream.npcloud.io:9443**
+* Standard MQTT client can be used to connected to stream
 
 # Detailed Stream information
 
-## New Task Streams
+## Task Streams
 
-**Stream Name:** newTask
+**Topic Name:** /task_update
 
 **Payload:**
 ```javascript
@@ -29,10 +24,9 @@
 }
 ```
 
-## Task Solution Streams
+## Solution Streams
 
-
-**Stream Name:** taskSolution
+**Topic Name:** /solution_update
 
 **Payload:**
 ```javascript
@@ -48,24 +42,5 @@
   "status": "SUBMITTED",     //status of the solution
   "solution": {},        //detail of this solution, defined by particular contracts(see contracts document)
   "createTime": 1233444      //receive time for this solution
-}
-```
-
-## Task Status Stream
-
-
-**Stream Name:** taskStatus
-
-**Payload:**
-```javascript
-{
-  "eventType": "taskStatus",  // Event type
-  "eventTime": 123456789,   // Event time
-  "tid": "1233",         // task id
-  "clientTaskId": "1233",      // task id specified by user
-  "contract": "SVPR",    // Contract symbol
-  "createTime": 123332,    // task create time
-  "solutionCount": 0,       //number of solutions
-  "status": "CLOSED",      //tasks latest status
 }
 ```
