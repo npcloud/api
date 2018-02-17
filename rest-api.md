@@ -44,9 +44,16 @@
 
 **Task status:**
 
-* NEW
-* DOING
+* SUBMITTING
+* SUBMITTED
 * CLOSED
+* REJECTED
+
+**Solution status:**
+
+* SUBMITTING
+* SUBMITTED
+* ACCEPTED
 * REJECTED
 
 
@@ -122,15 +129,19 @@ page | INT | NO | Page number
 **Response:**
 ```javascript
 [{
-  "tid": "1233",      // task id
-  "clientTaskId": "1233",      // task id specified by user
-  "contract": "SVPR",    // contract name
-  "status": "DOING",    // Task status
-  "createTime": 123332,    // task's create time
-  "expireTime": 122333,    // task's expire time
-  "createUser": 12345,       // Task's owner's user Id
-  "price": "0.001",     // Upper price for the solution
-  "solutionCount": 1       //number of solutions
+     "tid": "TASK_6370582750918868992",
+     "contract": "DemoContract",
+     "status": "SUBMITTED",
+     "createUser": 1,
+     "createTime": 1518865287523,
+     "lastUpdateTime": 1518865287586,
+     "price": 0.1,
+     "expireTime": 1518867087518,
+     "solutionIds": [
+       "SOL_6370589691506327552",
+       "SOL_6370586865522704384",
+       "SOL_6370583113004744704"
+     ]
 }]
 ```
 
@@ -156,14 +167,17 @@ page | INT | NO | Page number
 **Response:**
 ```javascript
 [{
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "NEW",    // Task type
-  "createTime": 123332,    // task create time
-  "expireTime": 122333,    // expire time of this task
-  "createUser": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
-  "solutionCount": 1,       //number of solutions
+     "tid": "TASK_6370505683665682432",
+     "contract": "DemoContract",
+     "status": "CLOSED",
+     "createUser": 1,
+     "createTime": 1518846913258,
+     "lastUpdateTime": 1518851202082,
+     "price": 0.1,
+     "expireTime": 1518848713257,
+     "solutionIds": [
+       "SOL_6370517052406366208"
+     ]
 }]
 ```
 
@@ -188,15 +202,19 @@ page | INT | NO | Page number
 **Response:**
 ```javascript
 [{
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "NEW",    // Task type
-  "clientTaskId": "1233",      // task id specified by user
-  "createTime": 123332,    // task create time
-  "expireTime": 122333,    // expire time of this task
-  "createUser": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
-  "solutionCount": 1,       //number of solutions
+     "tid": "TASK_6370582750918868992",
+     "contract": "DemoContract",
+     "status": "SUBMITTED",
+     "createUser": 1,
+     "createTime": 1518865287523,
+     "lastUpdateTime": 1518865287586,
+     "price": 0.1,
+     "expireTime": 1518867087518,
+     "solutionIds": [
+       "SOL_6370583113004744704",
+       "SOL_6370586865522704384",
+       "SOL_6370589691506327552"
+     ]
 }]
 ```
 
@@ -221,22 +239,40 @@ tid | STRING | YES | task id
 **Response:**
 ```javascript
 {
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Task type
-  "status": "NEW",    // Task type
-  "clientTaskId": "1233",      // task id specified by user
-  "expireTime": 122333,    // task's expire time
-  "createTime": 123332,    // task create time
-  "createUser": 12345,       // Task's owner's user Id
-  "price": "0.001",     // Upper price for the solution
-  "setting": {} ,          // detail information on the task
-  "solutions": [{       // solutions for this task
-          "sid": 1222,          //Solution id
-          "createUser": "111"     //solver's id
-          "objectives": {},       // solution's objectives defined by particular contracts(see contracts document)
-          "status": "SUBMITTED",       // is the solution is accepted by task publisher
-          "createTime": 1233444      //receive time for this solution
-  }]
+  "tid": "TASK_6370582750918868992",
+  "contract": "DemoContract",
+  "status": "SUBMITTED",
+  "createUser": 1,
+  "createTime": 1518865287523,
+  "lastUpdateTime": 1518865287586,
+  "price": 0.1,
+  "expireTime": 1518867087518,
+  "solutionIds": [],
+  "solutions": [
+    {
+      "tid": "TASK_6370582750918868992",
+      "sid": "SOL_6370583113004744704",
+      "contract": "DemoContract",
+      "status": "SUBMITTED",
+      "price": 0.1,
+      "createTime": 1518865373851,
+      "solutionDetail": {
+        "tid": "TASK_6370582750918868992",
+        "sid": "SOL_6370583113004744704",
+        "contract": "DemoContract",
+        "objectives": {
+          "result": 3
+        }
+      },
+      "createUser": 2
+    }
+  ],
+  "taskDetail": {
+    "tid": "TASK_6370582750918868992",
+    "contract": "DemoContract",
+    "left": 1,
+    "right": 2
+  }
 }
 ```
 
@@ -259,12 +295,21 @@ sid | STRING | YES | solution id
 **Response:**
 ```javascript
 {
-        "tid": 12,             //task id
-        "sid": 1222,          //Solution id
-        "workerId": "111"     //solver's id
-        "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-        "details": {},     //details of this solution, defined by particular contracts(see contracts document)
-        "createTime": 1233444      //receive time for this solution
+    "contract":"DemoContract",
+    "solutionDetail":
+    {
+        "contract":"DemoContract",
+        "objectives":{"result":3.0},
+        "sid":"SOL_6370583113004744704",
+        "sum":3,
+        "tid":"TASK_6370582750918868992"
+    },
+    "createTime":1518865373851,
+    "createUser":2,
+    "price":0.1,
+    "sid":"SOL_6370583113004744704",
+    "status":"ACCEPTED",
+    "tid":"TASK_6370582750918868992"
 }
 ```
 
@@ -279,10 +324,16 @@ Send in a new task.
 **Parameters:**
 ```javascript
 {
-  "contract": "SVPR",    // Contract symbol
-  "clientTaskId": "1233",      // task id specified by user
-  "price": "0.001",     // Upper price for the solution
-  "setting": {}           // detail information on the task, defined by particular contracts(see contracts document)
+  "clientTaskId": "111",
+  "contract": "DemoContract",
+  "expireTime": 0,
+  "price": 0.1,
+  "taskDetail": {
+    "contract": "DemoContract",
+    "tid": "",
+    "left": 1,
+    "right": 2
+  }
 }
 ```
 
@@ -291,13 +342,15 @@ Send in a new task.
 **Response:**
 ```javascript
 {
-  "tid": "1233",      // task id
-  "contract": "SVPR",    // Contract symbol
-  "clientTaskId": "1233",      // task id specified by user
-  "createTime": 123332,    // task create time
-  "status" : "NEW",       // status for task
-  "createUser": 12345,       // Task's publish user Id
-  "price": "0.001",     // Upper price for the solution
+  "tid": "TASK_6370595067689697280",
+  "contract": "DemoContract",
+  "status": "SUBMITTING",
+  "createUser": 1,
+  "createTime": 1518868224070,
+  "lastUpdateTime": 1518868224070,
+  "price": 0.1,
+  "expireTime": 1518870024068,
+  "solutionIds": []
 }
 ```
 
@@ -339,10 +392,16 @@ User publish solution for task.
 
 ```javascript
 {
-    "tid": "1233",      // task id
-    "price": "12.2"     //price set by the worker
-    "solution": {},     // solution detail, defined by particular contracts(see contracts document)
-    "%OTHER_SOLUTION_FIELDS%": {}, //detail of this solution, defined by particular contracts(see contracts document)
+  "clientSolutionId": "112",
+  "contract": "DemoContract",
+  "price": 0.1,
+  "solutionDetail": {
+    "contract": "DemoContract",
+    "objectives": {"result": 3},
+    "sum": 3,
+    "tid": "TA"
+  },
+  "taskId": "TASK_6370582750918868992"
 }
 ```
 
@@ -350,11 +409,21 @@ User publish solution for task.
 **Response:**
 ```javascript
 {
-    "tid": "1233",      // task id
-    "sid": "1233",      // solution id
-    "createUser": "111"     //solver's id
-    "price": "12.2"     //price set by the worker
-    "createTime": 1233444      //receive time for this solution
+  "tid": "TASK_6370582750918868992",
+  "sid": "SOL_6370594900236304384",
+  "contract": "DemoContract",
+  "status": "SUBMITTING",
+  "price": 0.1,
+  "createTime": 1518868184146,
+  "solutionDetail": {
+    "tid": "TASK_6370582750918868992",
+    "sid": "SOL_6370594900236304384",
+    "contract": "DemoContract",
+    "objectives": {
+      "result": 3
+    }
+  },
+  "createUser": 2
 }
 ```
 
@@ -374,12 +443,21 @@ sid | STRING | NO | Solution Id
 **Response:**
 ```javascript
 {
-  "tid": "1233",      // task id
-  "sid": 1222,          //Solution id
-  "workerId": "111"     //solver's id
-  "objectives": {},     //objectives of this solution, defined by particular contracts(see contracts document)
-  "%OTHER_SOLUTION_FIELDS%": {},          //detail of this solution, defined by particular contracts(see contracts document)
-  "createTime": 1233444      //receive time for this solution
+  "tid": "TASK_6370582750918868992",
+  "sid": "SOL_6370597756976758784",
+  "contract": "DemoContract",
+  "status": "ACCEPTED",
+  "price": 0.1,
+  "createTime": 1518868865246,
+  "solutionDetail": {
+    "tid": "TASK_6370582750918868992",
+    "sid": "SOL_6370597756976758784",
+    "contract": "DemoContract",
+    "objectives": {
+      "result": 3
+    }
+  },
+  "createUser": 2
 }
 ```
 
@@ -501,10 +579,6 @@ Errors consist of three parts: an error code, a message and a detail
 #### -1020 UNSUPPORTED_OPERATION
  * This operation is not supported.
 
-#### -1022 INVALID_SIGNATURE
- * Signature for this request is not valid.
-
-### 11xx - Request issues
 #### -1100 ILLEGAL_CHARS
  * Illegal characters found in a parameter.
 
@@ -522,7 +596,7 @@ Errors consist of three parts: an error code, a message and a detail
 #### -1105 PARAM_EMPTY
  * A parameter was empty.
 
-#### -1125 INVALID_LISTEN_KEY
+#### -1106 INVALID_LISTEN_KEY
  * This listenKey does not exist.
 
 
@@ -534,30 +608,62 @@ Errors consist of three parts: an error code, a message and a detail
 #### -2002 CONTRACT_SUSPEND
 * Contract is not enabled
 
-#### -2101 BUY_PRICE_INVALID
- * result's buy price is too high or too low
+### -2003 CONTRACT_CANNOT_LOAD
+* Contract cannot be load when processing task
 
-#### -2102 INVALID_CONTRACT_SETTING
- * Format or logical issues for contract setting
+#### -2004 USER_NOT_FOUND
+ * Request's user cannot be found
 
-#### -2103 CONTRACT_SCALE_OVERFLOW
- * Contract setting scale is bigger than max threshold
+#### -2005 STREAM_KEY_NOT_FOUND
+ * Stream key cannot be found when subscribing stream
 
-#### -2104 BALANCE_NOT_ENOUGH
- * User's balance is not enough to support creation of new task or accepting new solution
+#### -2006 BUY_PRICE_INVALID
+ * Task's price is must be large than 0
 
-#### -2105 NO_SOLUTION_FOUND
- * Solution not found to support operation
+#### -2007 INVALID_CONTRACT_SETTING
+ * Task's detail setting is not valid
 
-#### -2201 SELL_PRICE_INVALID
-  * result's sell price is too high or too low
+#### -2009 BALANCE_NOT_ENOUGH
+ * User's balance is not enough to support trading
 
-#### -2202 INVALID_ANSWER
-  * Optimization result given by the provider is invalid. Detail format of the
-   errors varies by different contact definition.
+#### -2010 NO_SOLUTION_FOUND
+  * Solution is not found to support following process
 
-#### -2203 NO_TASK_FOUND
- * Task not found to support operation
+#### -2011 SOLUTION_HAS_ACCEPTED
+  * Solution is already be accepted, but user try to accept it again
 
-#### -2204 TASK_IS_CLOSED
- * Task is not live to support operation
+#### -2012 SOLUTION_IS_REJECTED
+ * Solution is rejected but user try to accept it
+
+#### -2013 UNAUTHORIZED_ON_SOLUTION
+ * User try to accept a solution without permission
+
+#### -2014 DUPLICATE_LOCK
+ * User try to lock a balance twice
+
+#### -2015 LOCK_NOT_FOUND
+ * User try to lock a un-existing lock
+
+#### -2016 BALANCE_NOT_FOUND
+ * User's balance is not found
+
+#### -2017 SELF_TRADING
+ * User try to publish solution on its own's task
+
+#### -2018 SELL_PRICE_INVALID
+ * Solution's price setting in not valid
+
+#### -2019 INVALID_SOLUTION
+ * Solution information is not valid
+
+#### -2020 NO_TASK_FOUND
+ * Task cannot be found
+
+#### -2021 TASK_HAS_CLOSED
+ * Task is already closed
+
+#### -2023 DUPLICATE_CLIENT_TASK_ID
+ * User's specified task id is duplicate
+
+#### -2024 DUPLICATE_CLIENT_SOLUTION_ID
+ * User's specified solution id is duplicate
