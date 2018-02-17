@@ -32,12 +32,11 @@
   `application/x-www-form-urlencoded`.
 * Parameters may be sent in any order.
 
-# Endpoint security type
-* Each endpoint has a security type that determines the how you will
-  interact with it.
-* API-key are passed into the Rest API via the `X-NPC-APIKEY`;
+# Endpoint security check
+* Any request need to contain the API-key, a random number and a signature, which is a sha-256 hash of API-key + API-secret + Random Number
+* for example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
+* API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
 * API-keys and secret-keys **are case sensitive**.
-* API-keys are required for trading rest API
 
 
 ## ENUM definitions
