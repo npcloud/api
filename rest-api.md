@@ -33,8 +33,9 @@
 * Parameters may be sent in any order.
 
 # Endpoint security check
-* Any request need to contain the API-key, a random number and a signature, which is a sha-256 hash of API-key + API-secret + Random Number
+* Any request need to contain the **API key**, one **random number** and the **signature**, which is a sha-256 hash of API-key + API-secret + Random Number
 * for example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
+* User's API key and secret is assigned when user is registered on npcloud.io website
 * API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
 * API-keys and secret-keys **are case sensitive**.
 
