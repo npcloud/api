@@ -15,7 +15,7 @@
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",      // task id
-  "clientTaskId": "1233",      // task id specified by user
+  "clientId": "1233",      // task id specified by user
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
   "createUser": 12345,       // Task's publish user Id
@@ -34,13 +34,13 @@
   "eventType": "newSolution",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",         // task id
-  "clientTaskId": "1233",      // task id specified by user
+  "clientId": "1233",      // task id specified by user
   "sid": "1222",          //Solution id
   "contract": "SVPR",    // Contract symbol
   "createUser": "111"     //solver's id
   "price": "0.001",     //solution's price set by the worker
   "status": "SUBMITTED",     //status of the solution
-  "solution": {},        //detail of this solution, defined by particular contracts(see contracts document)
+  "objectives": {},        //objective values of this solution, defined by particular contracts(see contracts document)
   "createTime": 1233444      //receive time for this solution
 }
 ```
