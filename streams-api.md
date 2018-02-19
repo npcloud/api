@@ -15,7 +15,7 @@
   "eventType": "newTask",  // Event type
   "eventTime": 123456789,   // Event time
   "tid": "1233",      // task id
-  "clientId": "1233",      // task id specified by user
+  "clientId": "1233",      // task id specified by use/r
   "contract": "SVPR",    // Contract symbol
   "createTime": 123332,    // task create time
   "createUser": 12345,       // Task's publish user Id

@@ -256,20 +256,13 @@ tid | STRING | YES | task id
       "status": "SUBMITTED",
       "price": 0.1,
       "createTime": 1518865373851,
-      "solutionDetail": {
-        "tid": "TASK_6370582750918868992",
-        "sid": "SOL_6370583113004744704",
-        "contract": "DemoContract",
-        "objectives": {
-          "result": 3
-        }
-      },
+      "objectives": {
+                "result": 3
+      }
       "createUser": 2
     }
   ],
   "taskDetail": {
-    "tid": "TASK_6370582750918868992",
-    "contract": "DemoContract",
     "left": 1,
     "right": 2
   }
@@ -296,14 +289,8 @@ sid | STRING | YES | solution id
 ```javascript
 {
     "contract":"DemoContract",
-    "solutionDetail":
-    {
-        "contract":"DemoContract",
-        "objectives":{"result":3.0},
-        "sid":"SOL_6370583113004744704",
-        "sum":3,
-        "tid":"TASK_6370582750918868992"
-    },
+    "objectives":{"result":3.0 },
+    "solutionDetail": { "sum":3 },
     "createTime":1518865373851,
     "createUser":2,
     "price":0.1,
@@ -329,8 +316,6 @@ Send in a new task.
   "expireTime": 0,
   "price": 0.1,
   "taskDetail": {
-    "contract": "DemoContract",
-    "tid": "",
     "left": 1,
     "right": 2
   }
@@ -398,10 +383,7 @@ User publish solution for task.
   "contract": "DemoContract",
   "price": 0.1,
   "solutionDetail": {
-    "contract": "DemoContract",
-    "objectives": {"result": 3},
-    "sum": 3,
-    "tid": "TA"
+    "sum": 3
   },
   "taskId": "TASK_6370582750918868992"
 }
@@ -417,14 +399,7 @@ User publish solution for task.
   "status": "SUBMITTING",
   "price": 0.1,
   "createTime": 1518868184146,
-  "solutionDetail": {
-    "tid": "TASK_6370582750918868992",
-    "sid": "SOL_6370594900236304384",
-    "contract": "DemoContract",
-    "objectives": {
-      "result": 3
-    }
-  },
+  "objectives": { "result": 3 },
   "createUser": 2
 }
 ```
@@ -451,13 +426,9 @@ sid | STRING | NO | Solution Id
   "status": "ACCEPTED",
   "price": 0.1,
   "createTime": 1518868865246,
+  "objectives": { "result": 3 }
   "solutionDetail": {
-    "tid": "TASK_6370582750918868992",
-    "sid": "SOL_6370597756976758784",
-    "contract": "DemoContract",
-    "objectives": {
-      "result": 3
-    }
+    "sum" : 3
   },
   "createUser": 2
 }
