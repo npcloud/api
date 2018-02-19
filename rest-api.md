@@ -288,15 +288,19 @@ sid | STRING | YES | solution id
 **Response:**
 ```javascript
 {
-    "contract":"DemoContract",
-    "objectives":{"result":3.0 },
-    "solutionDetail": { "sum":3 },
-    "createTime":1518865373851,
-    "createUser":2,
-    "price":0.1,
-    "sid":"SOL_6370583113004744704",
-    "status":"ACCEPTED",
-    "tid":"TASK_6370582750918868992"
+  "tid": "TASK_6371239830277324800",
+  "sid": "SOL_6371244653529792512",
+  "contract": "DemoContract",
+  "status": "ACCEPTED",
+  "price": 0.1,
+  "createTime": 1519023097403,
+  "solutionDetail": {
+    "sum": 3
+  },
+  "objectives": {
+    "sum": 3
+  },
+  "createUser": 2
 }
 ```
 
