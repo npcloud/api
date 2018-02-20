@@ -1,60 +1,37 @@
 # Trading and Data API for NPCloud Exchange
+
+NPCloud REST API provide interface for user to submit optimization task,
+to submit solution for task, and to query task/solution data.
+
+![API usage diagram](assets/flowchart.png)
+
 # General API Information
 * The base endpoint is: **https://api.npcloud.io**
 * All endpoints return either a JSON object or array.
 * Data is returned in **descending** order in most case. Newest first, oldest last.
 * All time and timestamp related fields are in milliseconds.
-* HTTP `4XX` return codes are used for for malformed requests;
-  the issue is on the sender's side.
-* HTTP `5XX` return codes are used for internal errors; the issue is on
-  NPCloud's side.
 * Any endpoint can return an ERROR message; the error payload is as follows:
 ```javascript
 {
-  "code": -1121,
-  "msg": "Invalid symbol."
+  "code": -1002,
+  "msg": "UNAUTHORIZED"
   "data" : {}
 }
 ```
 
-* When endpoint process your request successfully, the payload is as follows:
-```javascript
-{
-  "code": 200,
-  "msg": ""
-  "data" : {}
-}
-```
-
+* When endpoint process your request successfully, the payload data will return directly
 * Specific error codes and messages defined in later int the document (see **error** section).
 * For `GET` endpoints, parameters must be sent as a `query string`.
 * For `POST`, `PUT`, and `DELETE` endpoints, the parameters should be sent in the `request body` with content type
   `application/x-www-form-urlencoded`.
 * Parameters may be sent in any order.
 
-# Endpoint security check
+# Security check
 * Any request need to contain the **API key**, one **random number** and the **signature**, which is a sha-256 hash of API-key + API-secret + Random Number
 * for example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
 * User's API key and secret is assigned when user is registered on npcloud.io website
 * API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
 * API-keys and secret-keys **are case sensitive**.
-
-
-## ENUM definitions
-
-**Task status:**
-
-* SUBMITTING
-* SUBMITTED
-* CLOSED
-* REJECTED
-
-**Solution status:**
-
-* SUBMITTING
-* SUBMITTED
-* ACCEPTED
-* REJECTED
 
 
 ## General endpoints
@@ -107,13 +84,170 @@ NONE
 }
 ```
 
+## Trading endpoints
+### New task
+```
+POST /api/v1/task
+```
+Send in a new task. Notice,  "taskDetail" is a object not defined here, and it's specified
+by the optimization algorithm contract. See [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+
+
+**Parameters:**
+```javascript
+{
+  "clientTaskId": "111",            //unique task id given by client, **optional**
+  "contract": "DemoContract",       //algorithm name, **required**
+  "expireTime": 0,                  //task's live time in seconds, default 1800. Value 0 mean no expriration
+  "price": 0.1,                     //price cannot be less than zero, **required**
+  "taskDetail": {                   //taskDetail is the input object of the optimization algorithm, **required**
+    "left": 1,
+    "right": 2
+  }
+}
+```
+
+
+
+**Response:**
+```javascript
+{
+  "tid": "TASK_6370595067689697280",    //task id given by exchange
+  "contract": "DemoContract",
+  "status": "SUBMITTING",               //see comments [1] below
+  "createUser": 1,
+  "createTime": 1518868224070,          //unix timestamp that record the create time of task
+  "lastUpdateTime": 1518868224070,
+  "price": 0.1,
+  "expireTime": 1518870024068,
+  "solutionIds": []                     //see comments [2] below
+}
+```
+
+[1] Task status can be one of SUBMITTING, REJECTED, SUBMITTED, CLOSED.
+SUBMITTING means task is received by exchange and is under processing.
+SUBMITTED means task is saved and published by exchange. REJECTED means task
+is invalid and is rejected by exchange. CLOSED is the status after task owner
+close the task, and then no more solution can be sent to task.
+
+[2] solutionIds is an array contains all valid solution id for this task
+the
+### Close Task
+```
+POST /api/v1/close_task
+```
+Task owner try to close an active task. New solution will not be submitted to task.
+Task is closed successfully when all pending solutions are processed.
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+tid | STRING | NO | task id
+
+**Response:**
+```javascript
+{
+  "tid": "TASK_6370525770497916928",
+  "contract": "DemoContract",
+  "status": "CLOSED",
+  "createUser": 1,
+  "createTime": 1518851702332,
+  "lastUpdateTime": 1518869937824,
+  "price": 0.1,
+  "expireTime": 1518853502320,
+  "solutionIds": []
+}
+```
+
+
+### Publish Solution
+```
+POST /api/v1/solution
+```
+User publish solution for task. After solution is verified by exchange,
+task owner can check the objectives of the solution by using the /solution_info
+API call, but the detail of solution will not be given.
+
+**Parameters:**
+
+```javascript
+{
+  "clientSolutionId": "112",            //solution id given by client, **required**
+  "contract": "DemoContract",           //algorithem name, **required**
+  "price": 0.1,                         //price cannot be less than zero, **required**
+  "solutionDetail": {                   //the output object of the optimization algorithm, **required**
+    "sum": 3
+  },
+  "taskId": "TASK_6370582750918868992"  //task is, **required**
+}
+```
+
+
+**Response:**
+```javascript
+{
+  "tid": "TASK_6370582750918868992",
+  "sid": "SOL_6370594900236304384",
+  "contract": "DemoContract",
+  "status": "SUBMITTING",              //see comments [1] below
+  "price": 0.1,
+  "createTime": 1518868184146,
+  "objectives": null,
+  "createUser": 2
+}
+```
+
+[1] Solution status can be one of SUBMITTING, SUBMITTED, REJECTED, ACCEPTED.
+SUBMITTING means the solution is received by exchange and is under processing.
+SUBMITTED means solution passes the verification. REJECTED mean solution is invalid.
+ACCEPTED means the solution is accepted by the algorithm user.
+
+### Task owner accept Solution
+```
+POST /api/v1/accept_solution
+```
+
+Task's owner can accept a valid solution, exchange will return solution's detail
+and deduct token from owner's balance.
+
+Notice, task owner can query detail solution
+later by using the /solution_info api call.
+
+Also,  "solutionDetail" is not defined fully in this document, and it's specified
+by the optimization algorithm contract. See [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+sid | STRING | NO | Solution Id
+
+**Response:**
+```javascript
+{
+  "tid": "TASK_6370582750918868992",
+  "sid": "SOL_6370597756976758784",
+  "contract": "DemoContract",
+  "status": "ACCEPTED",
+  "price": 0.1,
+  "createTime": 1518868865246,
+  "objectives": { "result": 3 }
+  "solutionDetail": {               //solution detail
+    "sum" : 3
+  },
+  "createUser": 2
+}
+```
+
+
 ## Data endpoints
 ### Query all live tasks
 
 ```
 GET /api/v1/live_tasks
 ```
-Get all living tasks by contract symbol
+Query all living tasks by contract symbol.
 
 
 **Parameters:**
@@ -137,7 +271,7 @@ page | INT | NO | Page number
      "lastUpdateTime": 1518865287586,
      "price": 0.1,
      "expireTime": 1518867087518,
-     "solutionIds": [
+     "solutionIds": [                   //all valid solution id for this task
        "SOL_6370589691506327552",
        "SOL_6370586865522704384",
        "SOL_6370583113004744704"
@@ -151,7 +285,7 @@ page | INT | NO | Page number
 ```
 GET /api/v1/published_tasks
 ```
-Query current user's publish tasks
+Query current user's publish task, in another word, tasks owned by current user.
 
 **Parameters:**
 
@@ -186,7 +320,7 @@ page | INT | NO | Page number
 ```
 GET /api/v1/solved_tasks
 ```
-Query current user's  tasks
+Query tasks which current user has published solutions for.
 
 **Parameters:**
 
@@ -224,7 +358,9 @@ page | INT | NO | Page number
 GET /api/v1/task_info
 ```
 
-Query task by task Id, return task information and task's solution summary.
+Query task by task Id, return task information and task's solution information.
+Notice, solution's detail information is not given here, and please use /solution_info API
+call to get solution's detail information.
 
 **Parameters:**
 
@@ -275,8 +411,8 @@ tid | STRING | YES | task id
 GET /api/v1/solution_info
 ```
 
-Query solution by solution id. Only solution's creator and solutions' acceptor can
-see solution's detail
+Query solution by solution id. Only solution's creator and solutions' acceptor
+has the privilege to see solution's detail.
 
 **Parameters:**
 
@@ -305,138 +441,6 @@ sid | STRING | YES | solution id
 ```
 
 
-## Trading endpoints
-### New task
-```
-POST /api/v1/task
-```
-Send in a new task.
-
-**Parameters:**
-```javascript
-{
-  "clientTaskId": "111",
-  "contract": "DemoContract",
-  "expireTime": 0,
-  "price": 0.1,
-  "taskDetail": {
-    "left": 1,
-    "right": 2
-  }
-}
-```
-
-
-
-**Response:**
-```javascript
-{
-  "tid": "TASK_6370595067689697280",
-  "contract": "DemoContract",
-  "status": "SUBMITTING",
-  "createUser": 1,
-  "createTime": 1518868224070,
-  "lastUpdateTime": 1518868224070,
-  "price": 0.1,
-  "expireTime": 1518870024068,
-  "solutionIds": []
-}
-```
-
-
-### Close Task
-```
-POST /api/v1/close_task
-```
-Try to close an active task. New solution will not be submitted to task.
-Task is closed successfully when all pending solutions are processed.
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-tid | STRING | NO | task id
-
-**Response:**
-```javascript
-{
-  "tid": "TASK_6370525770497916928",
-  "contract": "DemoContract",
-  "status": "CLOSED",
-  "createUser": 1,
-  "createTime": 1518851702332,
-  "lastUpdateTime": 1518869937824,
-  "price": 0.1,
-  "expireTime": 1518853502320,
-  "solutionIds": []
-}
-```
-
-
-### Publish Solution
-```
-POST /api/v1/solution
-```
-User publish solution for task.
-
-**Parameters:**
-
-```javascript
-{
-  "clientSolutionId": "112",
-  "contract": "DemoContract",
-  "price": 0.1,
-  "solutionDetail": {
-    "sum": 3
-  },
-  "taskId": "TASK_6370582750918868992"
-}
-```
-
-
-**Response:**
-```javascript
-{
-  "tid": "TASK_6370582750918868992",
-  "sid": "SOL_6370594900236304384",
-  "contract": "DemoContract",
-  "status": "SUBMITTING",
-  "price": 0.1,
-  "createTime": 1518868184146,
-  "objectives": { "result": 3 },
-  "createUser": 2
-}
-```
-
-### Task owner accept Solution
-```
-POST /api/v1/accept_solution
-```
-Task's owner can accept a valid solution, exchange will return solution's detail
-and deduct token from owner's balance.
-
-**Parameters:**
-
-Name | Type | Mandatory | Description
------------- | ------------ | ------------ | ------------
-sid | STRING | NO | Solution Id
-
-**Response:**
-```javascript
-{
-  "tid": "TASK_6370582750918868992",
-  "sid": "SOL_6370597756976758784",
-  "contract": "DemoContract",
-  "status": "ACCEPTED",
-  "price": 0.1,
-  "createTime": 1518868865246,
-  "objectives": { "result": 3 }
-  "solutionDetail": {
-    "sum" : 3
-  },
-  "createUser": 2
-}
-```
 
 
 ### Account information
