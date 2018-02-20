@@ -27,10 +27,10 @@ to submit solution for task, and to query task/solution data.
 * Parameters may be sent in any order.
 
 # Security check
-* Any request need to contain the **API key**, one **random number** and the **signature**, which is a sha-256 hash of API-key + API-secret + Random Number
-* for example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
+* Any request need to contain three extra headers,
+ **API key**,  **random number** and  **signature**. API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
+* Signature is a sha-256 hash of API-key + API-secret + Random Number. For example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
 * User's API key and secret is assigned when user is registered on npcloud.io website
-* API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
 * API-keys and secret-keys **are case sensitive**.
 
 
@@ -89,8 +89,8 @@ NONE
 ```
 POST /api/v1/task
 ```
-Send in a new task. Notice,  "taskDetail" is a object not defined here, and it's specified
-by the optimization algorithm contract. See [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+Send in a new task. Notice,  "taskDetail" is a object not defined here in this document but in
+ [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
 
 
 **Parameters:**
@@ -166,8 +166,11 @@ tid | STRING | NO | task id
 POST /api/v1/solution
 ```
 User publish solution for task. After solution is verified by exchange,
-task owner can check the objectives of the solution by using the /solution_info
-API call, but the detail of solution will not be given.
+task owner will get notification, and then can check the objectives of the solution by using the /solution_info
+API call.
+
+Field "solutionDetail" is not defined here in this document but in [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+
 
 **Parameters:**
 
@@ -211,11 +214,7 @@ POST /api/v1/accept_solution
 Task's owner can accept a valid solution, exchange will return solution's detail
 and deduct token from owner's balance.
 
-Notice, task owner can query detail solution
-later by using the /solution_info api call.
-
-Also,  "solutionDetail" is not defined fully in this document, and it's specified
-by the optimization algorithm contract. See [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+Notice, task owner can query detail solution later by using the /solution_info api call.
 
 **Parameters:**
 

@@ -10,7 +10,5 @@ Name | Description
 [stream-api.md](streams-api.md) | Details on available streams and payloads
 
 
-For details on optimization task and solution definition mentioned in rest-api document,
-such as  VRP and VRP variants optimization algorithm contracts,
-please check our public github repository at: [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+For details on optimization task and solution definition mentioned in rest-api document, please check our public github repository at: [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
 
