@@ -8,5 +8,5 @@ Name | Description
 [introduction.md](introduction.md)  | General introduction for starters
 [rest-api.md](rest-api.md)  | Details on the data and trading API
 [stream-api.md](streams-api.md) | Details on available streams and payloads
-[contracts.md ](contracts.md ) | Details on VRP and VRP variants optimization contracts
+[Task and solution definition](https://github.com/npcloud/npcloud-algorithms) | Details on optimization contract, such as  VRP and VRP variants optimization algorithm contracts
 
