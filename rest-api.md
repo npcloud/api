@@ -80,7 +80,7 @@ NONE
 **Response:**
 ```javascript
 {
-  "contracts": ["VPR", "SVRP"]
+  "contracts": ["VPRContract", "DemoContract"]
 }
 ```
 
@@ -89,49 +89,63 @@ NONE
 ```
 POST /api/v1/task
 ```
-Send in a new task. Notice,  "taskDetail" is a object not defined here in this document but in
+Send in a new task. Notice,  "taskDetail" object's format is not defined here in this document, but in
  [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
 
 
 **Parameters:**
 ```javascript
 {
-  "clientTaskId": "111",            //unique task id given by client, **optional**
-  "contract": "DemoContract",       //algorithm name, **required**
-  "expireTime": 0,                  //task's live time in seconds, default 1800. Value 0 mean no expriration
-  "price": 0.1,                     //price cannot be less than zero, **required**
-  "taskDetail": {                   //taskDetail is the input object of the optimization algorithm, **required**
-    "left": 1,
+  "clientTaskId": "111",
+  "contract": "DemoContract",
+  "expireTime": 0,
+  "price": 0.1,
+  "taskDetail": {
+     "left": 1,
     "right": 2
   }
 }
 ```
 
+[1] **clientTaskId**: unique task id given by client, optional
+
+[2] **contract**: algorithm name, required
+
+[3] **expireTime**: task's live time in seconds, default 1800. Value 0 mean task has no expiration time
+
+[4] **price**: price cannot be less than zero, required
+
+[5] **taskDetail**: taskDetail is optimization's input parameters, required
 
 
 **Response:**
 ```javascript
 {
-  "tid": "TASK_6370595067689697280",    //task id given by exchange
+  "tid": "TASK_6370595067689697280",
   "contract": "DemoContract",
-  "status": "SUBMITTING",               //see comments [1] below
+  "status": "SUBMITTING",
   "createUser": 1,
-  "createTime": 1518868224070,          //unix timestamp that record the create time of task
+  "createTime": 1518868224070,
   "lastUpdateTime": 1518868224070,
   "price": 0.1,
   "expireTime": 1518870024068,
-  "solutionIds": []                     //see comments [2] below
+  "solutionIds": []
 }
 ```
 
-[1] Task status can be one of SUBMITTING, REJECTED, SUBMITTED, CLOSED.
+[1] **tid**: task id given by exchange
+
+[2] **status**: Task status can be one of SUBMITTING, REJECTED, SUBMITTED, CLOSED.
 SUBMITTING means task is received by exchange and is under processing.
 SUBMITTED means task is saved and published by exchange. REJECTED means task
 is invalid and is rejected by exchange. CLOSED is the status after task owner
 close the task, and then no more solution can be sent to task.
 
-[2] solutionIds is an array contains all valid solution id for this task
+[3] **createTime**: unix timestamp that record the create time of task
+
+[4] **solutionIds**: solutionIds is an array contains all valid solution id for this task
 the
+
 ### Close Task
 ```
 POST /api/v1/close_task
@@ -165,9 +179,8 @@ tid | STRING | NO | task id
 ```
 POST /api/v1/solution
 ```
-User publish solution for task. After solution is verified by exchange,
-task owner will get notification, and then can check the objectives of the solution by using the /solution_info
-API call.
+User publish solution for certain task. After solution is verified by exchange,
+task owner will get notification from stream channel.
 
 Field "solutionDetail" is not defined here in this document but in [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
 
@@ -176,15 +189,25 @@ Field "solutionDetail" is not defined here in this document but in [npcloud-algo
 
 ```javascript
 {
-  "clientSolutionId": "112",            //solution id given by client, **required**
-  "contract": "DemoContract",           //algorithem name, **required**
-  "price": 0.1,                         //price cannot be less than zero, **required**
-  "solutionDetail": {                   //the output object of the optimization algorithm, **required**
+  "clientSolutionId": "112",
+  "contract": "DemoContract",
+  "price": 0.1,
+  "solutionDetail": {
     "sum": 3
   },
-  "taskId": "TASK_6370582750918868992"  //task is, **required**
+  "taskId": "TASK_6370582750918868992"
 }
 ```
+
+[1] **clientSolutionId** : solution id given by client, required
+
+[2] **contract**: algorithm name, required
+
+[3] **price**: price cannot be less than zero, required
+
+[4] **solutionDetail** : the output object of the optimization algorithm, required
+
+[5] **taskId**: target task of the solution
 
 
 **Response:**
@@ -193,7 +216,7 @@ Field "solutionDetail" is not defined here in this document but in [npcloud-algo
   "tid": "TASK_6370582750918868992",
   "sid": "SOL_6370594900236304384",
   "contract": "DemoContract",
-  "status": "SUBMITTING",              //see comments [1] below
+  "status": "SUBMITTING",
   "price": 0.1,
   "createTime": 1518868184146,
   "objectives": null,
@@ -201,7 +224,7 @@ Field "solutionDetail" is not defined here in this document but in [npcloud-algo
 }
 ```
 
-[1] Solution status can be one of SUBMITTING, SUBMITTED, REJECTED, ACCEPTED.
+[1] **status**: Solution status can be one of SUBMITTING, SUBMITTED, REJECTED, ACCEPTED.
 SUBMITTING means the solution is received by exchange and is under processing.
 SUBMITTED means solution passes the verification. REJECTED mean solution is invalid.
 ACCEPTED means the solution is accepted by the algorithm user.
@@ -232,7 +255,7 @@ sid | STRING | NO | Solution Id
   "price": 0.1,
   "createTime": 1518868865246,
   "objectives": { "result": 3 }
-  "solutionDetail": {               //solution detail
+  "solutionDetail": {
     "sum" : 3
   },
   "createUser": 2
@@ -270,7 +293,7 @@ page | INT | NO | Page number
      "lastUpdateTime": 1518865287586,
      "price": 0.1,
      "expireTime": 1518867087518,
-     "solutionIds": [                   //all valid solution id for this task
+     "solutionIds": [
        "SOL_6370589691506327552",
        "SOL_6370586865522704384",
        "SOL_6370583113004744704"
@@ -278,6 +301,7 @@ page | INT | NO | Page number
 }]
 ```
 
+[1] **solutionIds**: all valid  solution's (solution status in SUBMITTED, ACCEPTED) id for this task
 
 ### Query user's published tasks
 
