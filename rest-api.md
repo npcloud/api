@@ -28,8 +28,7 @@ to submit solution for task, and to query task/solution data.
 
 # Security check
 * Any request need to contain three extra headers,
- **API key**,  **random number** and  **signature**. API key is passed via Http header `X-NPC-APIKEY`, signature via "X-NPC-API_SIGN", random number via "X-NPC-API_RANDOM"
-* Signature is a sha-256 hash of API-key + API-secret + Random Number. For example, if your API key is "test", API secret is "secret", random number is 10, then signature is sha-256("testsecret10")
+ **API key**,  **API Secret**. API key is passed via Http header `X-NPC-API-KEY`, secret via "X-NPC-API-SECRET"
 * User's API key and secret is assigned when user is registered on npcloud.io website
 * API-keys and secret-keys **are case sensitive**.
 
