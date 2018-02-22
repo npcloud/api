@@ -6,7 +6,7 @@ to submit solution for task, and to query task/solution data.
 ![API usage diagram](assets/flowchart.png)
 
 # General API Information
-* The base endpoint is: **https://api.npcloud.io**
+* The base endpoint is: **http://api.npcloud.io**
 * All endpoints return either a JSON object or array.
 * Data is returned in **descending** order in most case. Newest first, oldest last.
 * All time and timestamp related fields are in milliseconds.
