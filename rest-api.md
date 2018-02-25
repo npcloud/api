@@ -414,9 +414,7 @@ tid | STRING | YES | task id
       "status": "SUBMITTED",
       "price": 0.1,
       "createTime": 1518865373851,
-      "objectives": {
-                "result": 3
-      }
+      "objectives": 3,
       "createUser": 2
     }
   ],
@@ -426,6 +424,10 @@ tid | STRING | YES | task id
   }
 }
 ```
+
+[1] **objectives** : solution summary calculated from full solution. It can be
+a simple number or a complex object. Detail definition can be found in at  [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
+
 
 ### Query solution detail
 
@@ -455,13 +457,12 @@ sid | STRING | YES | solution id
   "solutionDetail": {
     "sum": 3
   },
-  "objectives": {
-    "sum": 3
-  },
+  "objectives": 3,
   "createUser": 2
 }
 ```
 
+[1] **solutionDetail** : solution detail definition can be found in at  [npcloud-algorithm](https://github.com/npcloud/npcloud-algorithms)
 
 
 
